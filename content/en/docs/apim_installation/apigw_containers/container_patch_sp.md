@@ -53,3 +53,33 @@ To apply an update or service pack, follow these steps:
     ./build_anm_image.py --domain-cert=certs/mydomain/mydomain-cert.pem --domain-key=certs/mydomain/mydomain-key.pem --domain-key-pass-file=/tmp/pass.txt --anm-username=gwadmin --anm-pass-file=/tmp/gwadminpass.txt --merge-dir=/tmp/apigateway
     ./build_gw_image.py --license=/tmp/api_gw.lic --domain-cert=certs/mydomain/mydomain-cert.pem --domain-key=certs/mydomain/ mydomain-key.pem --domain-key-pass-file=/tmp/pass.txt --merge-dir=/tmp/apigateway
     ```
+
+## Apply a configuration update
+
+Certain API Gateway, API Manager and Admin Node Manager configurations can be deployed to containerized environments without the need to re-build the underlying docker images. Deployment of selected configuration types is controlled via the Config Deployer API. This API allows clients to upload new configurations to a shared persisent volume which is accessible by all containers in the environment.
+
+![Config Deployer Overview.](/Images/ContainerGuide/config_deployer.png)
+
+Updatable configurations include:
+
+| Configuration Type                        | Context                                                        | Description  |
+| ----------------------------------------- | -------------------------------------------------------------- |------------- |
+| gw-fed                                    | API Gateway                                                    | Configuration data for API Gateway stored as a federated entity store |
+| gw-jvm.xml                                | API Gateway                                                    | Configuration of Java system properties and modification API Gateway behaviour |
+| gw-envSettings.props                      | API Gateway                                                    | Environment settings for API Gateway instances, such as host and port information. |
+| anm-fed                                   | Admin Node Manager                                             | Configuration data for Node Manager stored as a federated entity store |
+
+Configuration of the above updateable congifiguration assests is managaged via `apigateway/system/conf/configDeployer.yaml`.
+
+| Property                                  | Required                                                       | Description  |
+| ----------------------------------------- | -------------------------------------------------------------- |------------- |
+| configDeployer                            | Yes                                                            | The list of different configuration file types and their associated properties that can be deployed using the Config Deployer API. |
+| type                                      | Yes                                                            | Specifies the type of the configuration file. Valid types are gw-fed, gw-jvm.xml, gw-envSettings.props and anm-fed. |
+| fileName                                  | Yes                                                            | Specifies the file name that the uploaded file name will be saved as. |
+| archive                                   | Yes                                                            | When set to true, the Config Deployer will create an archive directory of the previous configurations files saved to this target directory.  Valid options are true and false. |
+| explode                                   | Yes                                                            | Allows for the client to indicate that the configuration file must be exploded once it has been saved to the target directory. Valid options are true and false. |
+| archiveDir                                | No                                                             | Specifies the archive directory to save the configuration file to. |
+| targetDir                                 | Yes                                                            | Specifies the target directory to save the configuration file to. |
+
+To apply changes to the `apigateway/system/conf/configDeployer.yaml`, [create and start a new Admin Node Manager Docker container](/docs/apim_installation/apigw_containers/docker_script_baseimage) and ensure that the configDeployer.yaml is present in the merge directory  `--merge-dir`.
+
