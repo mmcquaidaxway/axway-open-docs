@@ -97,6 +97,7 @@ curl -k -i --location --request POST 'https://anm:8090/api/configuration/configD
 A 204 response code indicates that the requests was successful.
 
 The Config Deployer API allows for configuration assests to be depoyed to a configurable sub directory on the target directory:
+
 ```
 curl -k -i --location --request POST 'https://anm:8090/api/configuration/configDeploy' \
 --header 'Authorization: Basic <Authorization Credentials>' \
@@ -110,4 +111,3 @@ Once the configuration asset is successfully deployed onto the persistent volume
 ```
 kubectl -n service rollout restart deployment <name>
 ```
-
