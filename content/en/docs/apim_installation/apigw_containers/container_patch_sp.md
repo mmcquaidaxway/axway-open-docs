@@ -69,7 +69,7 @@ Updatable configurations include:
 | gw-envSettings.props                      | API Gateway                                                    | Environment settings for API Gateway instances, such as host and port information. |
 | anm-fed                                   | Admin Node Manager                                             | Configuration data for Node Manager stored as a federated entity store |
 
-Configuration of the above updateable congifiguration assests is managaged via `apigateway/system/conf/configDeployer.yaml`.
+Configuration of the above updateable congifiguration assests is managaged via `apigateway/system/conf/configDeployer.yaml`. This configuration has the following properties:
 
 | Property                                  | Required                                                       | Description  |
 | ----------------------------------------- | -------------------------------------------------------------- |------------- |
@@ -82,4 +82,32 @@ Configuration of the above updateable congifiguration assests is managaged via `
 | targetDir                                 | Yes                                                            | Specifies the target directory to save the configuration file to. |
 
 To apply changes to the `apigateway/system/conf/configDeployer.yaml`, [create and start a new Admin Node Manager Docker container](/docs/apim_installation/apigw_containers/docker_script_baseimage) and ensure that the configDeployer.yaml is present in the merge directory  `--merge-dir`.
+
+### Deploy a configuration update
+
+The Config Deployer API is used to deploy a configuration update. This API allows you to upload a configuration asset to the configured target directory which is visable to all containers in the environment. For example, to upload an updated envSettings.props, the following request is used:
+
+```
+curl -k -i --location --request POST 'https://anm:8090/api/configuration/configDeploy' \
+--header 'Authorization: Basic <Authorization Credentials>' \
+--form 'file=@"/home/user/Desktop/envSettings.props"' \
+--form 'type="gw-envSettings.props"'
+```
+
+A 204 response code indicates that the requests was successful.
+
+The Config Deployer API allows for configuration assests to be depoyed to a configurable sub directory on the target directory:
+```
+curl -k -i --location --request POST 'https://anm:8090/api/configuration/configDeploy' \
+--header 'Authorization: Basic <Authorization Credentials>' \
+--form 'file=@"/home/user/Desktop/envSettings.props"' \
+--form 'type="gw-envSettings.props"' \
+--form 'subDir="<your sub directory>"'
+```
+
+Once the configuration asset is successfully deployed onto the persistent volume, the client instances (e.g. API Gateway) must be restarted. For a EMT managed environment, the following command can be used:
+
+```
+kubectl -n service rollout restart deployment <name>
+```
 
