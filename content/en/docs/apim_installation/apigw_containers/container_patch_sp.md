@@ -85,7 +85,23 @@ To apply changes to the `apigateway/system/conf/configDeployer.yaml`, [create an
 
 ### Deploy a configuration update
 
-The Config Deployer API is used to deploy a configuration update. This API allows you to upload a configuration asset to the configured target directory which is visable to all containers in the environment. For example, to upload an updated envSettings.props, the following request is used:
+The Config Deployer API is used to deploy a configuration update. This API allows you to upload a configuration asset to the configured target directory which is visable to all containers in the environment.
+
+#### Enable configDeployAPI
+
+To enable the Config Deployer API, there are 2 solutions :
+
+1 - Add the following argument to the jvm.xml file of the Node Manager instance, and restart it.
+
+```
+<SystemProperty name="configdeployavailable" value="true" />
+```
+
+2- Add configdeployavailable to the environment variable
+
+#### Upload file via API
+
+Then, to upload an updated envSettings.props, the following request is used:
 
 ```
 curl -k -i --location --request POST 'https://anm:8090/api/configuration/configDeploy' \
