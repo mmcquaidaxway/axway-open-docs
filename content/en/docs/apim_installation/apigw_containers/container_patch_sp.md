@@ -77,7 +77,6 @@ Configuration of the above updateable congifiguration assests is managaged via `
 | type                                      | Yes                                                            | Specifies the type of the configuration file. Valid types are gw-fed, gw-jvm.xml, gw-envSettings.props and anm-fed. |
 | fileName                                  | Yes                                                            | Specifies the file name that the uploaded file name will be saved as. |
 | archive                                   | Yes                                                            | When set to true, the Config Deployer will create an archive directory of the previous configurations files saved to this target directory.  Valid options are true and false. |
-| explode                                   | Yes                                                            | Allows for the client to indicate that the configuration file must be exploded once it has been saved to the target directory. Valid options are true and false. |
 | archiveDir                                | No                                                             | Specifies the archive directory to save the configuration file to. |
 | targetDir                                 | Yes                                                            | Specifies the target directory to save the configuration file to. |
 
