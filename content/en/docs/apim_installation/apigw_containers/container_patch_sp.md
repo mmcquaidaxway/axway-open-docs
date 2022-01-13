@@ -93,10 +93,10 @@ To enable the Config Deployer API, there are 2 solutions :
 1 - Add the following argument to the jvm.xml file of the Node Manager instance, and restart it.
 
 ```
-<SystemProperty name="configdeployavailable" value="true" />
+<SystemProperty name="configDeployAvailable" value="true" />
 ```
 
-2- Add configdeployavailable to the environment variable
+2- Add configDeployAvailable to the environment variable
 
 #### Upload file via API
 
