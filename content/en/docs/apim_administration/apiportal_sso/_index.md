@@ -87,9 +87,8 @@ The following diagram shows a simplified message flow for SSO using SAML:
 The logout sequence is as follows when logout is initiated by API Portal:
 
 1. The end user tries to log out of API Portal by clicking the **Logout** button in the UI.
-2. API Portal sends a logout request to API Manager.
-3. API Manager recognizes that the end user has an active session, so it generates a SAML Logout Request message and sends it to the IdP.
-4. The IdP removes the user session and returns a SAML Logout Response to the browser.
-5. The browser posts the HTML form containing the SAML Logout Response to the API Portal single logout service URI.
-6. API Portal forwards the SAML Logout Response to API Manager
-7. API Manager removes the user session and redirects to the logout redirect URI.
+2. The IdP removes the user session and returns a SAML Logout Response to the browser.
+3. The browser posts the HTML form containing the SAML Logout Response to the API Portal single logout service URI.
+4. API Portal redirects to the logout redirect URI.
+
+When the end user tries to log out of API Portal, API Manager session remains active.
