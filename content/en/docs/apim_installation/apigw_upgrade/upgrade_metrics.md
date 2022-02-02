@@ -30,6 +30,7 @@ You must backup the metrics database being used in the old installation before u
 ### SQL Restore for rollback
 
 To roll back, you must perform the relevant SQL Restore operation to overwrite the newly created blank database (for example, `MetricsNew`) with the data and schema from the old metrics database.
+Once the data has been imported the database must be updated to the [latest schema](/docs/apim_installation/apigw_upgrade/upgrade_faq/#upgrade-api-gateway-analytics-database-table-schema).
 
 ## Enable metrics using managedomain
 

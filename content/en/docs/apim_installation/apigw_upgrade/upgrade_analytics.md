@@ -54,6 +54,7 @@ You must backup the API Gateway Analytics database being used in the old install
 ### SQL Restore for rollback
 
 To rollback, you must perform the relevant SQL Restore operation to overwrite the newly created blank database (for example, `ReporterNew`) with the data and schema from the old API Gateway Analytics database.
+Once the data has been imported the database must be updated to the [latest schema](/docs/apim_installation/apigw_upgrade/upgrade_faq/#upgrade-api-gateway-analytics-database-table-schema).
 
 ## Step 4 – Run upgradeconfig to migrate API Gateway Analytics Entity Store customizations
 
