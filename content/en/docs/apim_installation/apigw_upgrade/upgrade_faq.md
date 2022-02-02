@@ -262,6 +262,7 @@ It is also strongly advised that a clean new database is used `dbsetup --reinsta
 
 The `dbsetup` utility always checks the existing version, and modifies only if an update is required.
 For example, to start an interactive upgrade, run this script as follows:
+
 ```
 Connecting to configuration at : federated: file:///INSTALL_DIR/conf/fed/configs.xml
 
@@ -279,15 +280,17 @@ Press enter to exit...
 ```
 
 The `dbsetup` utility uses SQL upgrade scripts located in the following directory:
+
 ```
 INSTALL_DIR/apigateway/system/conf/sql/upgrade
 ```
 
 The subdirectories are named for the upgrade applied, and the order in which they must be
 executed. The following upgrades are currently available:
-| Upgrade Name | Description |
-| ------------ | ----------------------------------- | 
-|`000-initial`| 6.3 version of the schema.|
-|`001-topology`| 7.0 version of the schema.|
-|`002-leaf`| 7.4 version of the schema.|
-|`003-leaf`| 7.7 February 2022 version of the schema.|
+
+| Upgrade Name | Description                             |
+| ------------ | --------------------------------------- |
+|`000-initial` | 6.3 version of the schema.              |
+|`001-topology`| 7.0 version of the schema.              |
+|`002-leaf`    | 7.4 version of the schema.              |
+|`003-leaf`    | 7.7 February 2022 version of the schema.|
