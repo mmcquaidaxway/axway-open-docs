@@ -1,6 +1,6 @@
 {
-    "title": "Configuring an API Gateway Docker container",
-    "linkTitle": "Configuring an API Gateway Docker container",
+    "title": "Configure an API Gateway Docker container",
+    "linkTitle": "Configure an API Gateway Docker container",
     "weight": "30",
     "date": "2022-02-01",
     "description": "A guide on how to configure an API Gateway Docker container without the need to bake into a new Docker image."
@@ -10,9 +10,9 @@
 
 This document describes how an API Gateway, running in EMT mode, can be configured without the need to bake that configuration into a new Docker image. This process applies to API Gateway configurations only such as policy management, system property changes, environment settings, logging configurations etc.
 
-## Configuring an API Gateway Docker container
+## Configuring an API Gateway container with Docker volumes
 
-Adding configuration to an API Gateway Docker container is achieved using Docker volumes. The Docker volume facilitates the API Gateway configuration file, located on the host file system, to be mounted to the Docker container and made available to the API Gateway at startup time. API Gateway configuration files must be mounted to the following specific mount points:
+Docker volumes facilitates mounting API Gateway configuration files to the Docker container so that they are available to the API Gateway at startup time. API Gateway configuration files are stored in the host file system and then must be mounted to the following specific mount points:
 
 | Docker volume mount | Description |
 | ------------------- | ----------- |
