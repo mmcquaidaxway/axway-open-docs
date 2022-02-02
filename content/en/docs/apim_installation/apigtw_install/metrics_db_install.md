@@ -125,7 +125,7 @@ The following example command shows setting up new database tables:
 ```
 $ dbsetup
 New database
-Schema successfully upgraded to:002-leaf
+Schema successfully upgraded to:003-leaf
 ```
 
 When you specify command-line arguments to `dbsetup`, the script does not run interactively. Run `dbsetup` without any options to create the database tables.
@@ -155,9 +155,9 @@ You can use the `--dbname` option to connect to a named database connection conf
 
 ```
 $ dbsetup --dbname=Oracle
-Current schema version:001-initial
-Latest schema version:002-leaf
-Schema successfully upgraded to:002-leaf
+Current schema version:002-leaf
+Latest schema version:003-leaf
+Schema successfully upgraded to:003-leaf
 ```
 
 #### Connect to a database URL
@@ -166,9 +166,9 @@ You can use the `--dburl` option to manually connect to a database instance dire
 
 ```
 $ dbsetup --dburl=jdbc:mysql://localhost/reports --dbuser=root --dbpass=admin
-Current schema version:001-initial
-Latest schema version:002-leaf
-Schema successfully upgraded to:002-leaf
+Current schema version:002-leaf
+Latest schema version:003-leaf
+Schema successfully upgraded to:003-leaf
 ```
 
 Example: Setup for TLS with MySQL Server.
@@ -192,7 +192,7 @@ You can also use the `--dburl` option to set up a newly created database instanc
 ```
 $ dbsetup --dburl=jdbc:mysql://localhost/reports --dbuser=root --dbpass=admin
 New database
-Schema successfully upgraded to:002-leaf
+Schema successfully upgraded to:003-leaf
 ```
 
 #### Reinstall a database
@@ -202,7 +202,7 @@ You can use the `--reinstall` option to wipe and reinstall a database. For examp
 ```
 $ dbsetup --dburl=jdbc:mysql://localhost/reports --dbuser=root --dbpass=admin --reinstall
 Re-installing database...
-Schema successfully upgraded to:002-leaf
+Schema successfully upgraded to:003-leaf
 ```
 
 ## SQL database schema scripts

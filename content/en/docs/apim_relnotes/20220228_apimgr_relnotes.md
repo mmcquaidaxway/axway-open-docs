@@ -30,6 +30,43 @@ placeholder
 
 It is important, especially when upgrading from an earlier version, to be aware of the following changes in the behavior or operation of the product in this update, which may impact on your current installation.
 
+### Upgrade API Gateway Analytics database table schema
+
+**Note** You must upgrade the schema versions prior to 7.7 February 2022 to 7.7 February 2022 for API Gateway to function correctly.
+It is also strongly advised that a clean new database is used.
+
+The `dbsetup` utility always checks the existing version, and modifies only if an update is required.
+For example, to start an interactive upgrade, run this script as follows:
+```
+Connecting to configuration at : federated: file:///INSTALL_DIR/conf/fed/configs.xml
+
+Using Configured Database:
+DB Name: Default Database Connection
+DB URL: jdbc:mysql://127.0.0.1:3306/reports
+DB User: root
+Current schema version: 002-leaf
+Latest schema version: 003-leaf
+Please BACKUP old schema before proceeding with upgrade.
+Continue with upgrade (Y, N) [N]: Y
+About to upgrade schema. Please note that this operation may take some time for very large databases
+Schema successfully upgraded to: 003-leaf
+Press enter to exit...
+```
+
+The `dbsetup` utility uses SQL upgrade scripts located in the following directory:
+```
+INSTALL_DIR/apigateway/system/conf/sql/upgrade
+```
+
+The subdirectories are named for the upgrade applied, and the order in which they must be
+executed. The following upgrades are currently available:
+| Upgrade Name | Description |
+| ------------ | ----------------------------------- | 
+|`000-initial`| 6.3 version of the schema.|
+|`001-topology`| 7.0 version of the schema.|
+|`002-leaf`| 7.4 version of the schema.|
+|`003-leaf`| 7.7 February 2022 version of the schema.|
+
 ### Distributed cache socket connect timeout
 
 A new socket connect timeout is added for distributed cache replicated updates. The default timeout is 500 millisecond and can be changed if required using JVM system property `com.axway.rmi.socket.connect.timeout`, see [System property changes](/docs/apim_reference/system_props/#7.7 February 2022).

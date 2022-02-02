@@ -254,3 +254,40 @@ If you are upgrading from 7.4.0 and later versions, you should upgrade API Gatew
 ### Do you need to run `managedomain` to enable metrics?
 
 If you are upgrading from a 7.4.0 or later API Gateway domain where the Node Managers are configured to write to the database, you do not need to run `managedomain` for each Node Manager. This is because the configuration is migrated when the API Gateways are upgraded.
+
+### Upgrade API Gateway Analytics database table schema
+
+**Note** You must upgrade the schema versions prior to 7.7 February 2022 to 7.7 February 2022 for API Gateway to function correctly.
+It is also strongly advised that a clean new database is used `dbsetup --reinstall`.
+
+The `dbsetup` utility always checks the existing version, and modifies only if an update is required.
+For example, to start an interactive upgrade, run this script as follows:
+```
+Connecting to configuration at : federated: file:///INSTALL_DIR/conf/fed/configs.xml
+
+Using Configured Database:
+DB Name: Default Database Connection
+DB URL: jdbc:mysql://127.0.0.1:3306/reports
+DB User: root
+Current schema version: 002-leaf
+Latest schema version: 003-leaf
+Please BACKUP old schema before proceeding with upgrade.
+Continue with upgrade (Y, N) [N]: Y
+About to upgrade schema. Please note that this operation may take some time for very large databases
+Schema successfully upgraded to: 003-leaf
+Press enter to exit...
+```
+
+The `dbsetup` utility uses SQL upgrade scripts located in the following directory:
+```
+INSTALL_DIR/apigateway/system/conf/sql/upgrade
+```
+
+The subdirectories are named for the upgrade applied, and the order in which they must be
+executed. The following upgrades are currently available:
+| Upgrade Name | Description |
+| ------------ | ----------------------------------- | 
+|`000-initial`| 6.3 version of the schema.|
+|`001-topology`| 7.0 version of the schema.|
+|`002-leaf`| 7.4 version of the schema.|
+|`003-leaf`| 7.7 February 2022 version of the schema.|
