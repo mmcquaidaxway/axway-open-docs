@@ -46,8 +46,9 @@ To automatically register an existing back-end REST API:
 1. Click the **API Registration** > **Backend API** view in API Manager.
 2. Click **New API** and select one of the following:
 
-   * **Import Swagger API**: Import an API in Swagger format. Only JSON format is supported for Swagger API definition files.
+   * **Import Swagger API**: Import an API in Swagger/OAS format.
    * **Import WADL API**: Import an API in [Web Application Description Language](https://wadl.java.net/) (WADL) format.
+
 3. On the **Import API** dialog, complete the following:
 
    * **Source**: Select the source type from the list.
@@ -63,6 +64,15 @@ After the REST API is imported, it is displayed as read-only in API Manager. The
 You can click an API from the list to view its general details, methods, and schema model.
 
 {{< alert title="Note" color="primary" >}}Do not use spaces or the URL encoded `%20` in the base path URL.{{< /alert >}}
+
+{{< alert title="Note" color="primary" >}}SmartBear Swagger parser third-party libraries are used to import OAS definitions. Certificate checking is used in the parser when resolving remote references (import from URL), therefore the following flags may need to be added to `jvm.xml` file to resolve external references:
+
+   ```
+   <VMArg name="-Dio.swagger.parser.util.RemoteUrl.trustAll=true"/>
+   <VMArg name="-Dio.swagger.v3.parser.util.RemoteUrl.trustAll=true"/>
+   ```
+
+For more information, see [SSL Certificate error while trying to import swagger definition](https://community.smartbear.com/t5/ReadyAPI-Questions/SSL-Certificate-error-while-trying-to-import-swagger-definition/td-p/205283) and [Dealing with self-signed SSL certificates](https://github.com/swagger-api/swagger-parser#dealing-with-self-signed-ssl-certificates).{{< /alert >}}
 
 ## Import an existing web service back-end API
 
