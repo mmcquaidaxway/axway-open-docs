@@ -509,10 +509,10 @@ ${myOrg.customProperty1}
 You can use the **Read Application** filter to retrieve custom properties for applications. This automatically populates custom attributes and makes them available to the policy. In this filter, the **Application ID selector** represents the primary key, which enables the application details to be retrieved from the Cassandra database using the KPS:
 
 ```
-${apimgmt.application.id}
+${authentication.application.id}
 ```
 
-After a successful read, the custom property is available in the resulting attribute, which is configured using **Name of attribute to set**. For example, with an **Application ID Selector** of `${apimgmt.application.id}`, and a **Name of attribute to set** attribute set to `${myApp}`, you can access `customProperty1` using the following value:
+After a successful read, the custom property is available in the resulting attribute, which is configured using **Name of attribute to set**. For example, with an **Application ID Selector** of `${authentication.application.id}`, and a **Name of attribute to set** attribute set to `${myApp}`, you can access `customProperty1` using the following value:
 
 ```
 ${myApp.customProperty1}

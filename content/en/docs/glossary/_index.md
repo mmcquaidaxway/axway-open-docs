@@ -240,4 +240,4 @@ XSL
 
 XSLT
 
-: Extensible Stylesheet Language Transformation (XSLT) is used to convert XML documents into other XML documents or other formats (for example, HTML, plain text, or XSL Formatting objects)
+: Extensible Stylesheet Language Transformation (XSLT) is used to convert XML documents into other XML documents or other formats (for example, HTML, plain text, or XSL Formatting objects).

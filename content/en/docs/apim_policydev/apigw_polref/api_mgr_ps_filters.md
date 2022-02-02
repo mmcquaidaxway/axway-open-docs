@@ -101,7 +101,7 @@ Configure the following fields on the **General settings** tab:
 
 **Application ID selector**:
 
-Enter a selector expression with the name of the message attribute that contains the application ID. ID is the key to the application record in the KPS. The value of the selector is expanded at runtime. The default is `${apimgmt.application.id}`.
+Enter a selector expression with the name of the message attribute that contains the application ID. ID is the key to the application record in the KPS. The value of the selector is expanded at runtime. The default is `${authentication.application.id}`.
 
 **Name of attribute to set**:
 

@@ -451,3 +451,11 @@ Axway-defined Java system properties introduced in the 7.7 20211130 release
 |com.axway.api.runtime.management.allowRateLimit | API Manager | Allows customers to enable/disable the API Manager request rate limiter. Defaults to 'true'. |
 |com.axway.apigw.sso.auto.approval | API Manager SSO | Toggles whether SSO users are automatically approved or not. If set to false, a new SSO users must be approved by an API Manager Admin. Default value: 'true'
 |com.axway.apigw.sso.authorization | API Manager SSO | Toggles SSO authorizations ON or OFF. If set to false, the authorizations mapped from the SSO Users SAML assertion are ignored, and internally managed authorizations are used instead. Default value: 'true' |
+
+## 7.7 February 2022
+
+Axway-defined Java system properties introduced in the 7.7 20220228 release
+
+| System Property                                  | Context     | Description   |
+| ------------------------------------------------ | ----------- | ------------- |
+|axway.rmi.socket.connect.timeout | API Gateway |  A timeout to control how long a distributed Ehcache waits for a response for a synchronous update. A timeout value of 0 means no timeout.  Defaults to 500 milliseconds. |
