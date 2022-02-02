@@ -24,7 +24,7 @@ Docker volumes facilitates mounting API Gateway configuration files to the Docke
 The Docker volume configuration is then added to the Docker run command to start the API Gateway container with the new runtime configuration. For example:
 
 ```
-docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -v newFed.fed:/merge/fed -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG api-gateway-my-group:1.0
+docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -v /home/user/apigw/fed/newFed.fed:/merge/fed -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG api-gateway-my-group:1.0
 ```
 
 ## Sample API Gateway Docker container configurations
@@ -36,7 +36,7 @@ This section provides examples of how to configure an API Gateway Docker contain
 API Gateway policy configuration stored as a deployment package (.fed file) can be added to the Docker container runtime condfiuration by adding the `fed` file to the `/merge/fed` Docker volume:
 
 ```
-docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -v fedConfig.fed:/merge/fed -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG api-gateway-my-group:1.0
+docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -v /home/user/apigw/fed/newFed.fed -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG api-gateway-my-group:1.0
 ```
 
 ### YAML Entity Store configuration
@@ -44,7 +44,7 @@ docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:80
 The YAML based API Gateway policy configuration, packaged into a `.tar.gz` file for deployment, can be added to the Docker container runtime condfiuration by adding the `.tar.gz` file to the `/merge/yaml` Docker volume:
 
 ```
-docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -v yamlConfig.tar.gz:/merge/yaml -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG api-gateway-my-group:1.0
+docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -v /home/user/apigw/yaml/newYaml.tar.gz:/merge/yaml -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG api-gateway-my-group:1.0
 ```
 
 ### All other API Gateway configuration
@@ -52,7 +52,7 @@ docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:80
 All other API Gateway configuration, such as jvm.xml and envSettings.props, can be added to the Docker container runtime condfiuration via the `/merge/apigateway` Docker volume. These configurations should be stored locally in a directory structure which mirrors `apigateway` sub folder structure inside the Docker container. For example:
 
 ```
-localConfigFolder
+config
 ├── groups
 │   └── emt-group
 │       └── emt-service
@@ -67,7 +67,7 @@ localConfigFolder
 The API Gateway Docker container can then be started as follows:
 
 ```
-docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -v localConfigFolder:/merge/apigateway -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG api-gateway-my-group:1.0
+docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -v /home/user/apigw/config:/merge/apigateway -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG api-gateway-my-group:1.0
 ```
 
 ### Configuration verification
@@ -86,7 +86,7 @@ This configuration file lists all the external files which should be loaded into
 The API Gateway Docker container can then be started as follows:
 
 ```
-docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -v localConfigFolder:/merge/apigateway -v mandatoryConfigurationFile.yaml:/merge/mandatoryFiles -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG api-gateway-my-group:1.0
+docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -v /home/user/apigw/config:/merge/apigateway -v /home/user/apigw/mandatoryFiles.yaml:/merge/mandatoryFiles -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG api-gateway-my-group:1.0
 ```
 
 ## Further Information
