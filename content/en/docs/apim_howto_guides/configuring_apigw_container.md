@@ -17,7 +17,7 @@ Docker volumes facilitates mounting API Gateway configuration files to the Docke
 | Docker volume mount | Description |
 | ------------------- | ----------- |
 | /merge/fed | Mount point location for an API Gateway policy configuration stored as a deployment package (.fed file) |
-| /merge/yaml | TBC |
+| /merge/yaml | Mount point location for yaml based API Gateway policy configuration |
 | /merge/apigateway | Mount point location for all other API Gateway policy configurations e.g. jvm.xml, envSettings.props etc. |
 | /merge/mandatoryFiles | Mount point location for the verification of mandatory configuration files. See below (link TBC) |
 
@@ -41,10 +41,10 @@ docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:80
 
 ### YAML Entity Store configuration
 
-The YAML based API Gateway policy configuration, packaged into a `.tar.gz` file for deployment, can be added to the Docker container runtime condfiuration by adding the `.tar.gz` file to the `/merge/yaml` Docker volume:
+YAML based API Gateway policy configuration can be added to the Docker container runtime configuration by adding the source directory to the `/merge/yaml` Docker volume:
 
 ```
-docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -v /home/user/apigw/yaml/newYaml.tar.gz:/merge/yaml -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG api-gateway-my-group:1.0
+docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -v /home/user/apigw/yaml:/merge/yaml -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG api-gateway-my-group:1.0
 ```
 
 ### All other API Gateway configuration
