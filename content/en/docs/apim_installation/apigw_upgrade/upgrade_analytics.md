@@ -130,7 +130,7 @@ If you have created your own custom reports in your old API Gateway Analytics in
 Copy all `.json` files from the directory `conf/emc/analytics/reports` in the old installation, for example:
 
 ```
-/opt/Axway-7.4.1/analytics/conf/emc/analytics/reports
+/opt/Axway-7.5.3/analytics/conf/emc/analytics/reports
 ```
 
 Copy the files to the same location in the new installation, for example:
@@ -146,7 +146,7 @@ If you have made customizations to the `envSettings.props` file in your old API 
 Copy the `envSettings.props` file from the `conf` directory in the old installation, for example:
 
 ```
-/opt/Axway-7.4.1/analytics/conf
+/opt/Axway-7.5.3/analytics/conf
 ```
 
 Copy the file to the same location in the new installation, for example:
@@ -168,7 +168,7 @@ INSTALL_DIR/analytics/posix/bin
 For example, to stop API Gateway Analytics in the old installation, enter the following commands:
 
 ```
-cd /opt/Axway-7.4.1/analytics/posix/bin
+cd /opt/Axway-7.5.3/analytics/posix/bin
 ./analytics -k
 ```
 
