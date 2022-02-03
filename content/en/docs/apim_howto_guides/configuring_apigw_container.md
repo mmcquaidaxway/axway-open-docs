@@ -10,11 +10,11 @@
 
 The primary documentation outlining using the API GW in containers can be found here, see [Create and start API Gateway Docker container](/docs/apim_installation/apigw_containers/docker_script_gwimage). It outlines the creation of images and their deployment to containers.
 
-This following section describes how during deployment of an image, a persisted store can be utilised to update the configuration within the container. This process applies to API Gateway configurations only such as policy management, system property changes, environment settings, logging configurations etc. This ability will allow users to update configuration without the need to rebake the Docker Image. 
+This following section describes how during deployment of an image, a persisted store can be utilised to update the configuration within the container. This process applies to API Gateway configurations only such as policy management, system property changes, environment settings, logging configurations etc. This ability will allow users to update configuration without the need to rebake the Docker Image.
 
 ## Crating an API Gateway Docker Volumes
 
-Docker Volumes facilitate mounting API Gateway configuration files to the Docker container so that they are available to the API Gateway at run time. 
+Docker Volumes facilitate mounting API Gateway configuration files to the Docker container so that they are available to the API Gateway at run time.
 API Gateway configuration files are stored in the host file system. This file system can be across any hardware / cloud service offering the client utilising.
 
 The expected mounted directory structure should be as follows:
@@ -28,7 +28,7 @@ The expected mounted directory structure should be as follows:
 
 ## Running an API Gateway Container with a Docker Volume
 
-With the persisted store created as specified in the previous section the Docker volume configuration is then added to the Docker run command to start the API Gateway container with the new runtime configuration. For example: 
+With the persisted store created as specified in the previous section the Docker volume configuration is then added to the Docker run command to start the API Gateway container with the new runtime configuration. For example:
 
 ```
 docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -v /home/user/apigw/fed/newFed.fed:/merge/fed -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG api-gateway-my-group:1.0
