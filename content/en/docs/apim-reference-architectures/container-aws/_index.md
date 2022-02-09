@@ -722,8 +722,8 @@ Let's look at applying one of the patches for APIM v7.7 - `APIGateway 7.7 SP1 Pa
 
 Installing a service pack is identical to creating your first API Gateway/Manager Docker image. The only difference is that you just need to download and use a combined installation file that includes base product plus a corresponding service pack. As an example, we look at Amplify API Management v7.7 and API Management v7.7 with SP1 install files:
 
-* API Management v7.7 install is titled: *API Gateway and API Manager 7.7 Install (linux-x86-64)* with the following file - `APIGateway_7.7_Install_linux-x86-64_BN4.run`.
-* API Management v7.7 with SP1install is titled: *API Gateway 7.7 Install Service Pack 1 (linux-x86-64)* with the following file - `APIGateway_7.7_SP1_linux-x86-64_BN201908271.run`.
+* API Management v7.7 install is titled: _API Gateway and API Manager 7.7 Install (linux-x86-64)_ with the following file - `APIGateway_7.7_Install_linux-x86-64_BN4.run`.
+* API Management v7.7 with SP1install is titled: _API Gateway 7.7 Install Service Pack 1 (linux-x86-64)_ with the following file - `APIGateway_7.7_SP1_linux-x86-64_BN201908271.run`.
 
 The build process will be identical to the one described in [new configurations](#new-configurations).
 
