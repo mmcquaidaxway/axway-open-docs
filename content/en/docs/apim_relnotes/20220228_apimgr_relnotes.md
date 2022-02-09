@@ -32,7 +32,11 @@ It is important, especially when upgrading from an earlier version, to be aware 
 
 ### Distributed cache socket connect timeout
 
-A new socket connect timeout is added for distributed cache replicated updates. The default timeout is 500 millisecond and can be changed if required using JVM system property `com.axway.rmi.socket.connect.timeout`, see [System property changes](/docs/apim_reference/system_props/#7.7 February 2022).
+A new socket connect timeout is added for distributed cache replicated updates. The default timeout is 500 millisecond and can be changed if required using JVM system property `com.axway.rmi.socket.connect.timeout`. For more information, see [System property changes](/docs/apim_reference/system_props/#77-february-2022).
+
+### WSDL Schema Validation
+
+The Schema Validation filter now caches WSDL Schema objects to improve performance of WSDL schema validation. Previously only Schemas that were configured using the Schema Validation filter were cached. The size of the Schema Validation cache can be increased if required with system property schemaCacheSize. For more information, see [System property changes](/docs/apim_reference/system_props/#762).
 
 ## Deprecated features
 
