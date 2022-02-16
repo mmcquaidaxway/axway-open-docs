@@ -13,7 +13,7 @@ These steps are optional and only for users who wish to use API Gateway Analytic
 To create an API Gateway Analytics Docker image, use the `build_aga_image.py`
 script. This script builds an API Gateway Analytics Docker image using an API Gateway 7.7 Linux installer and a Docker image based on a standard or custom CentOS7 or RHEL7 operating system image.
 
-{{< alert title="Caution" color="warning" >}}Docker automatically downloads the latest CentOS or RHEL7 image, which may potentially contain security vulnerabilities. Axway is not responsible for any third-party base O/S images. You must ensure that all base O/S images are up-to-date and apply any security patches if necessary.{{< /alert >}}
+{{< alert title="Caution" color="warning" >}}Docker automatically downloads the latest CentOS or RHEL7 image, which may potentially contain security vulnerabilities. Axway is not responsible for any third-party base OS images. You must ensure that all base OS images are up-to-date and apply any security patches if necessary.{{< /alert >}}
 
 ### API Gateway Analytics image script options
 
@@ -106,8 +106,10 @@ This example creates an API Gateway Analytics Docker image named `apigw-analytic
 
 Use the `docker run` command to start the API Gateway Analytics container.
 
+{{< alert title="Note" >}}API Gateway Analytics container **requires** you to enable the `ACCEPT_GENERAL_CONDITIONS` environment variable to acknowledge that you have read and accepted [Axway License, Support, and Service Agreement](https://cdn.axway.com/u/Axway_General_Conditions_version_april_2014_eng%20(France).pdf). {{< /alert >}}
+
 ```
-docker run -it --name=analytics -p 8040:8040 --network=api-gateway-domain -v /tmp/reports:/tmp/reports -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd apigw-analytics:1.0
+docker run -it --name=analytics -p 8040:8040 --network=api-gateway-domain -v /tmp/reports:/tmp/reports -e ACCEPT_GENERAL_CONDITIONS=yes -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd apigw-analytics:1.0
 ```
 
 This example performs the following:
@@ -116,9 +118,10 @@ This example performs the following:
 * Binds the port 8040 of the container to port `8040` on the host machine. This enables you to access the API Gateway Analytics web UI on port `8040` of your host machine.
 * Mounts the host directory `/tmp/reports` inside the container to store API Gateway Analytics reports.
 * Uses environment variables to specify connection details for the metrics database. The metrics database must be running as detailed in [Start external data stores](/docs/apim_installation/apigw_containers/docker_scripts_prereqs/#start-external-data-stores).
+* Sets the `ACCEPT_GENERAL_CONDITIONS` environment variable to `yes` to acknowledge that you have accepted [Axway License, Support, and Service Agreement](https://cdn.axway.com/u/Axway_General_Conditions_version_april_2014_eng%20(France).pdf).
 
 To run the container in the background, use the `-d` option, for example:
 
 ```
-docker run -d --name=analytics -p 8040:8040 --network=api-gateway-domain -v /tmp/reports:/tmp/reports -e  METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd apigw-analytics:1.0
+docker run -d --name=analytics -p 8040:8040 --network=api-gateway-domain -v /tmp/reports:/tmp/reports -e ACCEPT_GENERAL_CONDITIONS=yes -e  METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd apigw-analytics:1.0
 ```

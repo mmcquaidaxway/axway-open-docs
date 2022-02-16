@@ -182,14 +182,12 @@ This example creates an API Gateway Docker image named `api-gateway-api-mgr-grou
 
 ## Start the API Gateway Docker container
 
-Use the `docker run` command to start the API Gateway container.
+Use the `docker run` command to start the API Gateway container. The following example shows how to run an API Manager-enabled API Gateway container in the background on a specific port:
 
-### Start an API Manager-enabled API Gateway container
-
-The following example shows how to run an API Manager-enabled API Gateway container in the background on a specific port:
+{{< alert title="Note" >}}API Gateway Analytics container **requires** you to enable the `ACCEPT_GENERAL_CONDITIONS` environment variable to acknowledge that you have read and accepted [Axway License, Support, and Service Agreement](https://cdn.axway.com/u/Axway_General_Conditions_version_april_2014_eng%20(France).pdf). {{< /alert >}}
 
 ```
-docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG api-gateway-my-group:1.0
+docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -e ACCEPT_GENERAL_CONDITIONS=yes -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG api-gateway-my-group:1.0
 ```
 
 This example performs the following:
@@ -202,6 +200,7 @@ This example performs the following:
 * Uses `METRICS_DB_URL`, `METRICS_DB_USERNAME` and `METRICS_DB_PASS` environment variables to specify connection details for the metrics database.
 * Uses an environment variable `EMT_TRACE_LEVEL` to set a trace level inside the container. In the above example a trace level switches from INFO to DEBUG level during container startup.
 * Sets the `EMT_ANM_HOSTS` environment variable to `anm:8090` in the container. This enables the API Gateway to communicate with the Admin Node Manager container on port `8090`. The API Gateway is now visible in the API Gateway Manager topology view.
+* Sets the `ACCEPT_GENERAL_CONDITIONS` environment variable to `yes` to acknowledge that you have accepted [Axway License, Support, and Service Agreement](https://cdn.axway.com/u/Axway_General_Conditions_version_april_2014_eng%20(France).pdf).
 
 ![API Gateway container in topology view](/Images/ContainerGuide/gw_mgr_topology.png)
 
@@ -210,7 +209,7 @@ This example performs the following:
 You can persist API Gateway trace and event logs to a directory on your host machine. For example, run the following `docker run` command to start an API Gateway container from an image named `api-gateway-my-group:1.0` and mount volumes for trace and event logs:
 
 ```
-docker run -it -v /tmp/events:/opt/Axway/apigateway/events -v /tmp/trace:/opt/Axway/apigateway/groups/emt-group/emt-service/trace -e EMT_ANM_HOSTS=anm:8090 -p 8080:8080 --network=api-gateway-domain api-gateway-my-group:1.0
+docker run -it -v /tmp/events:/opt/Axway/apigateway/events -v /tmp/trace:/opt/Axway/apigateway/groups/emt-group/emt-service/trace -e EMT_ANM_HOSTS=anm:8090 -e ACCEPT_GENERAL_CONDITIONS=yes -p 8080:8080 --network=api-gateway-domain api-gateway-my-group:1.0
 ```
 
 This example starts the API Gateway container and writes the trace and log files to `/tmp/events` and `/tmp/trace` on your host machine. The trace and log files contain the container ID of the API Gateway container in the file names.
@@ -222,7 +221,7 @@ This example starts the API Gateway container and writes the trace and log files
 The following simple example sets the `EMT_DEPLOYMENT_ENABLED` environment variable to `true` to enable you to deploy configuration directly from Policy Studio to the running API Gateway container:
 
 ```
-docker run -d -e EMT_DEPLOYMENT_ENABLED=true -e EMT_ANM_HOSTS=anm:8090 -p 8080:8080 --network=api-gateway-domain api-gateway-my-group:1.0
+docker run -d -e EMT_DEPLOYMENT_ENABLED=true -e EMT_ANM_HOSTS=anm:8090 -e ACCEPT_GENERAL_CONDITIONS=yes -p 8080:8080 --network=api-gateway-domain api-gateway-my-group:1.0
 ```
 
 {{< alert title="Caution" color="warning" >}}
