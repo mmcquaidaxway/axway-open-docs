@@ -10,6 +10,13 @@ List of the major changes made in each release of API Gateway, API Manager, and 
 
 You can find the release notes for all service packs on [Axway Support](https://support.axway.com).
 
+## Version 7.7 2022
+
+|Update       |New features and enhancements        |Important Changes    |Deprecated features  |Release Date|
+|---------    |---               |---                  |---                  |---         |
+|[7.7.202228](/docs/apim_relnotes/20220228_apimgr_relnotes/)| Placeholder | Placeholder | Placeholder |28/02/2022|
+|| | | | |
+
 ## Version 7.7 2021
 
 |Update       |New features and enhancements        |Important Changes    |Deprecated features  |Release Date|
