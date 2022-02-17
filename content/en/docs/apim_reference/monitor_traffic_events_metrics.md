@@ -117,7 +117,7 @@ You can use the following settings to configure transaction file management.
 
 Enter the maximum size of the transaction file, and select the units from the list. The default value is 8 MiB. When this limit is reached, a new file is created.
 
-{{< alert title="Note" color="primary" >}}When using an environment variable, eg. ${env.maxTransactionFile} the value must be expressed as bytes. For example, an 8MiB file size would need env.maxTransactionFile = 8388608{{< /alert >}}
+When using environment variables, for example, `${env.maxTransactionFile}`, this value must be expressed as bytes. For example, an 8MiB file size would need an env.maxTransactionFile = 8388608.
 
 **Create new transaction file every day**:
 
