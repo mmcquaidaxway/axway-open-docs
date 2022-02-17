@@ -168,6 +168,11 @@ To enable one-way authentication, create a user with the option `REQUIRE SSL`.
 3. Test the connection to the database server from the API Portal machine:
 
    ```shell
+   # for MySQL client installed with MySQL package
+   mysql -h <database host> -u <user name> -p \
+       --ssl-ca=/etc/mysql/certs/ca.pem \
+       --ssl-mode=VERIFY_IDENTITY
+   # for MySQL client installed with MariaDB package
    mysql -h <database host> -u <user name> -p \
        --ssl-ca=/etc/mysql/certs/ca.pem \
        --ssl-verify-server-cert
@@ -195,6 +200,13 @@ To enable two-way authentication, create a user with the option `REQUIRE X509`.
 3. Test the connection to the database server from the API Portal machine:
 
    ```shell
+   # for MySQL client installed with MySQL package
+   mysql -h <database host> -u <user name> -p \
+       --ssl-ca=/etc/mysql/certs/ca.pem \
+       --ssl-cert=/etc/mysql/certs/client-cert.pem \
+       --ssl-key=/etc/mysql/certs/client-key.pem \
+       --ssl-mode=VERIFY_IDENTITY
+   # for MySQL client installed with MariaDB package
    mysql -h <database host> -u <user name> -p \
        --ssl-ca=/etc/mysql/certs/ca.pem \
        --ssl-cert=/etc/mysql/certs/client-cert.pem \
