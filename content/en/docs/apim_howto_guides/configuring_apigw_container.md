@@ -58,11 +58,11 @@ docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:80
 
 ## Sample API Gateway Docker container configurations
 
-This section provides examples of how to configure an API Gateway Docker containeri for different configuration types.
+This section provides examples of how to configure an API Gateway Docker container for different configuration types.
 
 ### API Gateway policy configuration
 
-API Gateway policy configuration stored as a deployment package (.fed file) can be added to the Docker container runtime condfiuration by adding the `fed` file to the `/merge/fed` Docker volume:
+API Gateway policy configuration stored as a deployment package (.fed file) can be added to the Docker container runtime configuration by adding the `fed` file to the `/merge/fed` Docker volume:
 
 ```
 docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -v /home/user/apigw/fed/newFed.fed -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG api-gateway-my-group:1.0
@@ -78,7 +78,7 @@ docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:80
 
 ### All other API Gateway configuration
 
-All other API Gateway configuration, such as jvm.xml and envSettings.props, can be added to the Docker container runtime condfiuration via the `/merge/apigateway` Docker volume. These configurations should be stored locally in a directory structure which mirrors `apigateway` sub folder structure inside the Docker container. For example:
+All other API Gateway configuration, such as jvm.xml and envSettings.props, can be added to the Docker container runtime configuration via the `/merge/apigateway` Docker volume. These configurations should be stored locally in a directory structure which mirrors `apigateway` sub folder structure inside the Docker container. For example:
 
 ```
 config
