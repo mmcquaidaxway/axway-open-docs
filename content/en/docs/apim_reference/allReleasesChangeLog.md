@@ -21,6 +21,14 @@ You can find the release notes for all service packs on [Axway Support](https://
 
 |Update       |New features and enhancements        |Important Changes    |Deprecated features  |Release Date|
 |---------    |---               |---                  |---                  |---         |
+|[7.7.20211130](/docs/apim_relnotes/20211130_apimgr_relnotes/)|Set Client Credentials as a Grant type|YAML support in Policy Studio|Developer tools on Windows 8.1|30/11/2021|
+||New Amplify menu header|Docker scripts now use Python 3|-||
+|**Update**       |**New features and enhancements**        |**Important Changes**    |**Deprecated features**  |**Release Date**|
+|[7.7.20210830](/docs/apim_relnotes/20210830_apimgr_relnotes/)|Elastic-Stack Logging is available for API Gateway|McAfee Anti-Virus filter has been retired|Apache Cassandra 2.2.x|30/08/2021|
+||YAML configuration store|Support for Apache Cassandra 3.11.11|-||
+||ICAP message preview|-|-||
+||Unauthenticated request rate limiter is available|-|-||
+|**Update**       |**New features and enhancements**        |**Important Changes**    |**Deprecated features**  |**Release Date**|
 |[7.7.20210530](/docs/apim_relnotes/20210530_apimgr_relnotes/)|Dependency view and revoke access to front-end APIs|From the May update onwards, the update schedule will change from every two months to every three months.                  |PS Antivirus filters                 |30/05/2021|
 ||Import APIs over HTTPS through a HTTPS proxy server|Embedded ActiveMQ host name verification|The packet sniffing capability is deprecated from this update                 ||
 ||YAML configuration store (GA)|INSTALL_DIR/apigateway folder permissions changed|MariaDB 5.5||
