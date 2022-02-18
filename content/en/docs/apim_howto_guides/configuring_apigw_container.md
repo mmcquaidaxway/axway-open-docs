@@ -37,10 +37,9 @@ docker run -d --name=apimgr --network=api-gateway-domain \
            -v /home/user/apigw/mandatoryFiles.yaml:/merge/mandatoryFiles \
            -v /home/user/apigw/config:/merge/apigateway \
            -e ACCEPT_GENERAL_CONDITIONS=yes -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 \
-	   -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd \
+           -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd \
            api-gateway-my-group:1.0
 ```
-
 
 Once the container is run, the API Gateway configuration files mounted within the Docker volumes are copied to the file system within the running container in its `/merge` directory. For example:
 
@@ -62,7 +61,6 @@ Once the container is run, the API Gateway configuration files mounted within th
 ```
 
 The original factory configuration in the `/opt/Axway/apigateway` directory will be replaced  with the hosted configuration in the `/merge` directory. The new configuration will then be reflected in the running API Gateway instance.
-
 
 ## Configuration Verification
 
@@ -94,7 +92,7 @@ docker run -d --name=apimgr --network=api-gateway-domain \
            -v /home/user/apigw/fed/newFed.fed:/merge/fed \
            -e ACCEPT_GENERAL_CONDITIONS=yes -e EMT_ANM_HOSTS=anm:8090 -e CASS_HOST=casshost1 \
            -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd \
-	   api-gateway-my-group:1.0
+           api-gateway-my-group:1.0
 ```
 
 ### YAML Entity Store configuration
