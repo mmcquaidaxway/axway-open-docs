@@ -7,7 +7,7 @@
 }
 ## Install dependencies from RedHat Software Collections on RHEL 7
 
-On a Red Hat Enterprise Linux (RHEL7) installation, the default PHP version available in the official repository is 5.4. However, API Portal only supports PHP 7.1.X-7.4.X. You can use RedHat Software Collections (RHSCL) to install PHP 7.1.X-7.4.X.
+On a Red Hat Enterprise Linux (RHEL7) installation, the default PHP version available in the official repository is 5.4. However, API Portal only supports PHP 7.1.X-8.0.X. You can use RedHat Software Collections (RHSCL) to install PHP 7.1.X-8.0.X.
 
 ### Enable RedHat Software Collections
 
@@ -109,7 +109,7 @@ sudo yum install http://rpms.remirepo.net/enterprise/remi-release-$(rpm -E '%{rh
 
 ```bash
 # for CentOS 8
-sudo dnf install epel-release yum-utils
+sudo dnf install epel-release
 sudo dnf install http://rpms.remirepo.net/enterprise/remi-release-$(rpm -E '%{rhel}').rpm
 sudo dnf update
 ```
@@ -117,11 +117,8 @@ sudo dnf update
 ```bash
 # for RHEL 8
 sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E '%{rhel}').noarch.rpm
-
 sudo subscription-manager repos --enable codeready-builder-for-rhel-8-$(arch)-rpms
-
 sudo dnf install https://rpms.remirepo.net/enterprise/remi-release-$(rpm -E '%{rhel}').rpm
-
 sudo dnf install dnf-utils
 ```
 
@@ -175,23 +172,21 @@ sudo dnf install dnf-utils
 
    ```bash
    # for CentOS 7
-   sudo yum-config-manager --enable remi-php74
+   sudo yum-config-manager --enable remi-php80
    sudo yum install php php-cli php-common php-gd php-json php-intl php-mbstring php-mysqlnd php-pdo php-xml php-pecl-zip
    ```
 
    ```bash
    # for CentOS 8
    sudo dnf module reset php
-   sudo dnf module install php:remi-7.4
-
+   sudo dnf module install php:remi-8.0
    sudo dnf install php php-cli php-common php-gd php-json php-intl php-mbstring php-mysqlnd php-pdo php-xml php-pecl-zip
    ```
 
    ```bash
    # for RHEL 8
    sudo dnf module reset php
-   sudo dnf module install php:remi-7.4
-
+   sudo dnf module install php:remi-8.0
    sudo dnf install php php-cli php-common php-gd php-json php-intl php-mbstring php-mysqli php-openssl php-pdo php-xml php-zip
    ```
 2. Verify that PHP was installed. If the command fails, restart the bash session:
@@ -210,7 +205,7 @@ sudo dnf install dnf-utils
 
    ```bash
    # for CentOS 7/8 and RHEL 8
-   httpd -M | grep php7
+   httpd -M | grep php
    ```
 5. Restart Apache and verify that it is working:
 
