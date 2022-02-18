@@ -16,7 +16,6 @@ Axway Mobile Backend Services provide pre-built, scalable, cloud, and mobile-spe
 
 Mobile Backend Services also include the ability to send push notifications to Android and iOS apps, and Software Development Kits (SDKs) for integration with the following mobile apps:
 
-* Titanium
 * Android
 * iOS
 * Node.js
