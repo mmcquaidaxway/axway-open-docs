@@ -39,3 +39,11 @@ Run the `nodetool removenode` command to remove the old Cassandra node from the
 ### Restoring to Cassandra 2.2.8/2.2.12
 
 In the event of a failed migration, you can restore your Cassandra environment to its original 2.2.8/2.2.12 state using the backup data. For more information, see [Restore API Management and KPS keyspaces](/docs/cass_admin/cassandra_bur/#restore-api-management-and-kps-keyspaces-manually).
+
+### Restored Keyspace not visible in API Manager UI
+
+After restoring a keyspace using the `apigw-backup-tool` the restored KPS data should be visible via the API Manager UI.  However if this is not the case, the Cassandra keyspace name may need to be updated in the Server Settings via Policy Studio.
+
+By default the keyspace name value is referenced via the variable `x${DOMAINID}_${GROUPID}`. When the API Manager is configured a keyspace will be created matching this naming convention.  If the keyspace being restored has a different name (possibly created with a different Gateway) it's name will need to replace the default Cassandra keyspace value.
+
+
