@@ -47,9 +47,9 @@ For example, the developer chooses to environmentalize the following settings in
 * **X.509 Certificate** field in an HTTPS interface named **OAuth 2.0 Interface**
 * **URL**, **User Name**, **Password**, and **Signing Key** fields in a **Sample Active Directory Connection**
 
-The policy developer edits the database connection, **Connect to URL** filter, HTTPS interface, and LDAP connection. You can click the **Environmentalize** icon (globe icon on the right of the fields) as shown in the following examples. Alternatively, press **Ctrl-E** to environmentalize a selected field.
+The policy developer edits the database connection, **Connect to URL** filter, HTTPS interface, and LDAP connection. You can click the **Environmentalize** icon (![Environmentalize icon](/Images/docbook/images/deploy/env_off.png), a globe icon on the right side of the fields) as shown in the following examples. Alternatively, press **Ctrl-E** to environmentalize a selected field.
 
-{{< alert title="Tip" color="primary" >}}You must give the field focus before the **Environmentalize** icon is displayed.{{< /alert >}}
+{{< alert title="Tip" color="primary" >}}You must select the field for focus before the **Environmentalize** icon (![Environmentalize](/Images/docbook/images/deploy/env_off.png)) is displayed.{{< /alert >}}
 
 For example, to environmentalize the database connection, select **Environment Configuration** > **External Connections** > **Database Connections** > **Default Database Connection** > **Edit**, and click **Environmentalize** next to the appropriate fields:
 
@@ -63,8 +63,7 @@ To environmentalize the HTTPS interface, select **Environment Configuration** > 
 
 ![Example HTTPS Interface](/Images/docbook/images/promotion/environmentalize_https.png)
 
-To environmentalize the LDAP connection, select **External Connections** > **LDAP Connections** > **Sample Active Directory Connection** > **Edit**, and click **Environmentalize**
-next to the appropriate fields:
+To environmentalize the LDAP connection, select **External Connections** > **LDAP Connections** > **Sample Active Directory Connection** > **Edit**, and click **Environmentalize** next to the appropriate fields:
 
 ![Example Database Connection](/Images/docbook/images/promotion/environmentalize_ldap.png)
 
@@ -76,19 +75,27 @@ After environmentalizing the fields, the following nodes are available under the
 
 ![Viewing Environment Settings](/Images/docbook/images/promotion/environment_settings.png)
 
+For YAML-based projects, the following nodes are available under the **Environment Configuration** > **Yaml Values Settings** node in Policy Studio:
+
+![Viewing Yaml Values Settings](/Images/docbook/images/promotion/yaml_values_settings.png)
+
 ### Update environment settings
 
-Assuming the policy developer has already entered values for the fields that they have selected to be environmentalized, these values are automatically specified under the **Environment Configuration** >**Environment Settings** node. To update the setting values for the development environment, you must use the **Environment Settings** tree node.
+Assuming the policy developer has already entered values for the fields that they have selected to be environmentalized, these values are automatically specified under the **Environment Configuration** > **Environment Settings** node. To update the setting values for the development environment, you must use the **Environment Settings** or **Yaml Values Settings** tree node.
 
 For example, using the example environmentalized settings, the following window is displayed when you select **Environment Settings** > **External Connections** > **Database Connections** > **Default Database Connection**:
 
 ![Edit Database Connection in Environment Settings](/Images/docbook/images/promotion/edit_db_env_setting.png)
 
+The YAML equivalent defaults to **Yaml Values Settings** > **External_Connections** > **Database_Connections** > **Default_Database_Connection**.
+
 ### Deselect environment settings
 
 To disable environmentalization for a setting, you can right-click its node in the **Environment Configuration** > **Environment Settings** tree, and select **Remove**. This also deselects the field in the window used to edit the configuration setting (for example, database connection). The value configured before environmentalization is displayed again.
 
-Alternatively, you can click the **Jump to configuration** link, and return to the window used to edit the configuration setting, and deselect the **Environmentalize** icon on this field, or press **Ctrl-E**. This also removes the field as a setting to be configured under the **Environment Settings** tree. The value configured before environmentalization is displayed again.
+Alternatively, you can click the **Jump to configuration** link, and return to the window used to edit the configuration setting, and deselect the Environmentalize icon on this field, or press **Ctrl-E**. This also removes the field as a setting to be configured under the **Environment Settings** tree. The value configured before environmentalization is displayed again.
+
+{{< alert title="Note" color="primary" >}}YAML supports referencing the same value across multiple entities and fields. As a result **Jump to configuration** is more complex and not yet supported. While you may insert the current value back into an entity by toggling **Environmentalization** via the configuration dialog on the original entity, the value from your `values.yaml` file is not automatically deleted to avoid breaking other possible references.{{< /alert >}}
 
 ### Deploy the configuration
 

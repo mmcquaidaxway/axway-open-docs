@@ -15,7 +15,7 @@ The QuickStart tutorial is automatically installed as part of a default **Standa
 
 ## Install the QuickStart tutorial
 
-To install the API Gateway Server and the QuickStart tutorial in GUI mode, perform an installation following the steps described in [Installation options](/docs/apim_installation/apigtw_install//installation#select-setup-type), using the following selections:
+To install the API Gateway Server and the QuickStart tutorial in GUI mode, perform an installation following the steps described in [Installation options](/docs/apim_installation/apigtw_install/installation#select-setup-type), using the following selections:
 
 * Select the **Custom** setup type.
 * Select to install the API Gateway Server, Admin Node Manager, and QuickStart tutorial components.
@@ -25,7 +25,7 @@ To install the API Gateway Server, Admin Node Manager, and QuickStart tutorial i
 The following example shows how to install the API Gateway Server component and the QuickStart tutorial in unattended mode:
 
 ```
-APIGateway_7.7_Install_linux-x86-32_BNyyyyMMdd.run --mode unattended --setup_type advanced --enable-components apigateway,nodemanager,qstart --disable-components,policystudio,apitester,configurationstudio,apimgmt,cassandra,packagedeploytools --licenseFilePath mylicense.lic
+APIGateway_7.7_Install_linux-x86-32_BNyyyyMMdd.run --mode unattended --setup_type advanced --enable-components apigateway,nodemanager,qstart --disable-components policystudio,configurationstudio,apimgmt,cassandra,packagedeploytools --licenseFilePath mylicense.lic
 ```
 
 ## QuickStart domain configuration

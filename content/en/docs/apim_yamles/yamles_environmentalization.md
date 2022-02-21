@@ -47,7 +47,7 @@ fields:
 ```
 
 ```yaml
-# Content of the value.yaml
+# Content of the values.yaml
 db:
   host: localhost
   username: scott
