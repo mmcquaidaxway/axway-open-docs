@@ -43,6 +43,8 @@ API Gateway supports the following in a production environment:
 
 For details on requirements for high availability, see [Configure a Cassandra HA cluster](/docs/cass_admin/cassandra_config/).
 
+{{< alert title="Note" >}}The prerequisites are a minimum configuration. For environments built on AWS, s3.large instances might not be enough depending on the volume of data in production. In this case, an upgrade to a m4.xlarge instance can be better to meet the high demand in a production environment.{{< /alert >}}
+
 ### JRE requirements and recommendations
 
 The default API Gateway installation includes a 64-bit OpenJDK JRE (`apigateway/Linux.x86_64/jre/bin`). You can configure Cassandra to use the API Gateway JRE (for example, in a demo environment), but it is recommended that you install a separate JRE (OpenJDK or Oracle) for use with Cassandra. When using a separate JRE, use the same version (or at least the same major version) as the API Gateway uses and ensure that the `JAVA_HOME` environment variable is set and pointing to the file system location where the JRE is installed.
@@ -51,7 +53,27 @@ The default API Gateway installation includes a 64-bit OpenJDK JRE (`apigateway/
 
 Cassandra is designed to run on commodity distributed drives, and therefore it is strongly recommended not to use a storage area network (SAN) for Cassandra deployments.
 
-For more information on Cassandra hardware choice recommendations, see [Hardware choices]( https://cassandra.apache.org/doc/latest/operating/hardware.html).
+For more information on Cassandra hardware choice recommendations, see [Hardware choices](https://cassandra.apache.org/doc/3.11/cassandra/operating/hardware.html).
+
+### AWS General Recommendations
+
+For environments built on Amazon Web Services nodes, observe the following checklist before installing Cassandra.
+
+* Use `M5.xlarge - M5.4xlarge` or `R5.xlarge - R5.4xlarge` instance types
+* If using Ubuntu, use the recent 18.04 AMI
+* EBS volumes must have at least 10k IOPS available to them
+* Use either `ext4` or `xfs` filesystems, using block size 4096 bytes (xfs is preferred)
+* EBS are `gp2` optimized
+* Each instance is a dedicated instance
+* With a recent kernel, use the kyber IO scheduler
+* Set the `current_clocksource` to `tsc`
+* Ensure disk `nomerges` is enabled
+* Ensure disk `read_ahead_kb` is `4`
+* Ensure `zone_reclaim_mode` is off
+* Ensure `irqbalance` is running (enabled)
+* Ensure no swap is mounted, and swappiness is set to zero
+* Ensure `/etc/localtime` is symlinked to your correct timezone, for example, Europe/Berlin
+* Ensure an `ntp` client is running on system (`chrony` is a good option for AWS)
 
 ## Install Apache Cassandra
 

@@ -477,7 +477,7 @@ To properly increase or decrease the number of runtime components to accommodate
 
 ##### Node scaling
 
-AKS can create new nodes (in different pools) when a pod can't be scheduled because of insufficient resources (CPU or RAM). For example, when you perform a rolling update of an API gateway, Kubernetes create pods from the new docker image before deleting the old ones. For example, if you run 6 replicas with a maximum of 2CPU per pod, Kubernetes will need 6 more CPUs to create a new deployment during a short time. This means that Kubernetes will create 2 new nodes (if using the recommended VM size) in *akspool* during the deployment. Kubernetes will delete them after 5 minutes of low activity (under 50% average usage).
+AKS can create new nodes (in different pools) when a pod can't be scheduled because of insufficient resources (CPU or RAM). For example, when you perform a rolling update of an API gateway, Kubernetes create pods from the new docker image before deleting the old ones. For example, if you run 6 replicas with a maximum of 2CPU per pod, Kubernetes will need 6 more CPUs to create a new deployment during a short time. This means that Kubernetes will create 2 new nodes (if using the recommended VM size) in _akspool_ during the deployment. Kubernetes will delete them after 5 minutes of low activity (under 50% average usage).
 
 If the allocated number of nodes/VMs is not enough for increasing traffic, and your API solution may experience an abrupt increase of API calls, Axway recommends using a platform-provided mechanism to scale nodes. For Azure, it should be an Azure Automation script based on a target resource consumption, for example, CPU.
 
@@ -1004,7 +1004,7 @@ Let's look at applying one of the patches for APIM v7.7 - APIGateway 7.7-SP1 Pat
 Installing a service pack is identical to creating your first API Gateway/Manager Docker image. The only difference is that you just need to download and use a combined installation file that includes base product plus a corresponding service pack. As an example, we look at Amplify API Management v7.7 and API Management v7.7 with SP1 install files:
 
 * API Management v7.7 install is titled: _API Gateway and API Manager 7.7 Install (linux-x86-64)_ with the following file: `APIGateway_7.7_Install_linux-x86-64_BN4.run`
-* API Management v7.7 with SP1 install is titled: *API Gateway 7.7 Install Service Pack 1 (linux-x86-64)* with the following file: `APIGateway_7.7_SP1_linux-x86-64_BN201908271.run`
+* API Management v7.7 with SP1 install is titled: _API Gateway 7.7 Install Service Pack 1 (linux-x86-64)_ with the following file: `APIGateway_7.7_SP1_linux-x86-64_BN201908271.run`
 
 The build process will be identical to the one described in [new configurations](#new-configurations).
 

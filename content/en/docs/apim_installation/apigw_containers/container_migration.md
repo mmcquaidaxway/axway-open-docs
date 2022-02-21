@@ -131,16 +131,18 @@ To build images, follow these steps:
 
 To start the Admin Node Manager and API Gateway Docker containers, follow these steps:
 
+{{< alert title="Note" >}}API Gateway Analytics container **requires** you to enable the `ACCEPT_GENERAL_CONDITIONS` environment variable to acknowledge that you have read and accepted [Axway License, Support, and Service Agreement](https://cdn.axway.com/u/Axway_General_Conditions_version_april_2014_eng%20(France).pdf). {{< /alert >}}
+
 1. Start the Admin Node Manager container as detailed in [Start the Admin Node Manager Docker container](/docs/apim_installation/apigw_containers/docker_script_anmimage/#start-the-admin-node-manager-docker-container). For example:
 
     ```
-    docker run -it -p 8090:8090 --name=ANM1 --network=my_network my-domain-anm:1.0
+    docker run -it -p 8090:8090 --name=ANM1 -e ACCEPT_GENERAL_CONDITIONS=yes --network=my_network my-domain-anm:1.0
     ```
 
     Alternatively, if metrics are enabled:
 
     ```
-    docker run -it -p 8090:8090 --name=ANM1 --network=my_network -v /tmp/gw-events:/opt/Axway/apigateway/events my-domain-anm:1.0
+    docker run -it -p 8090:8090 --name=ANM1 -e ACCEPT_GENERAL_CONDITIONS=yes --network=my_network -v /tmp/gw-events:/opt/Axway/apigateway/events my-domain-anm:1.0
     ```
 
     You can now log in to API Gateway Manager at `https://docker_host:8090` with the same administrator credentials as you used for your classic deployment.
@@ -148,20 +150,20 @@ To start the Admin Node Manager and API Gateway Docker containers, follow these 
 2. Start the Group1 API Gateway container as detailed in [Start the API Gateway Docker container](/docs/apim_installation/apigw_containers/docker_script_gwimage/#start-the-api-gateway-docker-container). For example:
 
     ```
-    docker run -it -p 8075:8075 -e EMT_ANM_HOSTS= ANM1:8090 --network=my_network my-gw-group1:1.0
+    docker run -it -p 8075:8075 -e EMT_ANM_HOSTS= ANM1:8090 -e ACCEPT_GENERAL_CONDITIONS=yes --network=my_network my-gw-group1:1.0
     ```
 
 3. Start the Group2 API Gateway container. For example:
 
     ```
-    docker run -it -e EMT_ANM_HOSTS=ANM1:8090 --network=my_network my-gw-group2:1.0
+    docker run -it -e EMT_ANM_HOSTS=ANM1:8090 -e ACCEPT_GENERAL_CONDITIONS=yes--network=my_network my-gw-group2:1.0
     ```
 
     Alternatively, if metrics are enabled start GW1 and GW2 as follows:
 
     ```
-    docker run -it -p 8075:8075 -p 8065:8065 -e EMT_ANM_HOSTS=ANM1:8090 --network=my_network -v /tmp/gw-events:/opt/Axway/apigateway/events my-gw-group1:1.0
-    docker run -it -e EMT_ANM_HOSTS=ANM1:8090 --network=my_network -v /tmp/gw-events:/opt/Axway/apigateway/events my-gw-group2:1.0
+    docker run -it -p 8075:8075 -p 8065:8065 -e EMT_ANM_HOSTS=ANM1:8090 -e ACCEPT_GENERAL_CONDITIONS=yes --network=my_network -v /tmp/gw-events:/opt/Axway/apigateway/events my-gw-group1:1.0
+    docker run -it -e EMT_ANM_HOSTS=ANM1:8090 -e ACCEPT_GENERAL_CONDITIONS=yes --network=my_network -v /tmp/gw-events:/opt/Axway/apigateway/events my-gw-group2:1.0
     ```
 
     You can now log in to API Manager UI of Group1 at `https://docker_host:8075` with the same API administrator credentials as you used for your classic deployment.

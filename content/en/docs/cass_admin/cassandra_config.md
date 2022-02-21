@@ -98,9 +98,9 @@ You must repeat these steps for each additional node.
 
 ### Multi-DC Cassandra cluster  
 
-For more complex Cassandra cluster deployments, the following information is important:  
+For more complex Cassandra cluster deployments, the following information is important:
 
-* The parameter `listen_address` is used for the internal Cassandra cluster communication using the Gossip protocol. You can either use the parameter `listen_address` or the `listen_interface`. Ensure that the assigned IP address is reachable from _all_ other nodes in the cluster.  
+* The parameter `listen_address` is used for the internal Cassandra cluster communication using the Gossip protocol. You can either use the parameter `listen_address` or the `listen_interface`. Ensure that the assigned IP address is reachable from all other nodes in the cluster.
 * The `rpc_address` is used for Cassandra clients like API Manager to connect to the node. This IP address might be different to the `listen_address` as it must be reachable for local clients only.
 
 ### Create a new Cassandra database user

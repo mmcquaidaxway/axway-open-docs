@@ -16,7 +16,7 @@ The API Manager REST APIs are available from the following locations:
 
 ## Import the API Manager REST API
 
-You can import the API Manager REST API Swagger 2.0 definitions into API Manager in the same way that you import any other APIs. For example:
+You can import the API Manager REST API Swagger 2.0 (OAS2) or OAS3 definitions into API Manager in the same way that you import any other APIs. For example:
 
 1. Click the **API Registration** > **Backend API** view in API Manager.
 2. Click **New API** and select **Import Swagger API**.
@@ -28,6 +28,8 @@ You can import the API Manager REST API Swagger 2.0 definitions into API Manager
     * **Organization**: Select the organization from the list (for example, **API Development**).
 4. Click **Import** to import the API Manager API.
 
-For more details, see [Register REST APIs in API Manager](/docs/apim_administration/apimgr_admin/api_mgmt_register_web/).
+The following image shows the details of the API Manager v1.3 Swagger 2.0 back-end API.
 
 ![API Manager REST API Swagger 2.0 Definition](/Images/docbook/images/api_mgmt/api_mgmt_rest_api.png)
+
+For more details, see [Register REST APIs in API Manager](/docs/apim_administration/apimgr_admin/api_mgmt_register_web/).

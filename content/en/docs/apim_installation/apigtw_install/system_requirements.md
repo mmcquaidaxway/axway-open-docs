@@ -33,7 +33,7 @@ Your Linux system must have the `LANG` environment variable set. If this variabl
 ENV LANG=en_US.UTF-8
 ```
 
-This variable is automatically set for you in EMT mode.
+This variable is automatically set for you in EMT mode, but it can be overridden by directly modifying the EMT API Gateway Dockerfiles or setting an environment variable at container runtime. For more information, see [Best practices for running API management in Docker containers](/docs/apim_howto_guides/apigw_in_containers/#setting-locale-environment-variables).  
 
 In CentOS 8.x and Red Hat Enterprise Linux 8.x, the GNU C Library (glibc) no longer includes `libnsl` and `glibc-langpack-en` libraries. However, those were included in previous releases and are required by the API Gateway. To install the missing libraries, run the following command:
 

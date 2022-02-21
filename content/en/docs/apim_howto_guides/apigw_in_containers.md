@@ -51,19 +51,31 @@ After these changes, the size of the generated Docker base images is reduced fro
 
 ### Optimize images for Node Manager and API Gateways
 
-In addition, you can create a layered [multi-stage](https://docs.docker.com/develop/develop-images/multistage-build/) image for Admin Node Manager and the API Gateways and in these images you can remove additional folders that are not required.
+In addition, you can create a layered [multi-stage](https://docs.docker.com/develop/develop-images/multistage-build/) image for API Gateway and Admin Node Manager, and you can remove additional folders, which are not required, from these images. For example, follow this procedure to reduce the size of the API Gateway image to 715 MB and the Admin Node Manager image to 708 MB.
 
 1. Open the file `Dockerfiles/emt-nodemanager/Dockerfile`.
 2. Change the line `FROM $PARENT_IMAGE` to `FROM $PARENT_IMAGE as base`.
-3. Add the following line at the end before the `CMD` instruction:
+3. Add the following line at the end of the file, before the `CMD` instruction:
 
     ```
     FROM centos:7
     COPY --from=base /opt/Axway/apigateway /opt/Axway/apigateway
     ```
 
-4. Remove the folders that you do not require. Download the following complete example files to learn which folders you can remove in each image:
-    * [`anm-dockerfile`](/samples/apimanagement/howto/docker/anm-dockerfile)
-    * [`gw-dockerfile`](/samples/apimanagement/howto/docker/gw-dockerfile)
+4. Remove any folder which is not required.
 
-This reduces the size of the API Gateway image to 715 MB and the Admin Node Manager image to 708 MB.
+Download the following complete example files to learn which folders you can remove in each image:
+
+* [`anm-dockerfile`](/samples/apimanagement/howto/docker/anm-dockerfile)
+* [`gw-dockerfile`](/samples/apimanagement/howto/docker/gw-dockerfile)
+
+## Set locale environment variables
+
+The API Gateway Docker image is automatically created with the `LANG` environment variable set to `en_US.UTF-8`. This is required to handle Unicode-named files that might be in use in your configuration (`fed` files). If needed, this environment variable can be manually overridden in two ways:
+
+* By editing the API Gateway Dockerfile, found at `Dockerfiles\emt-gateway\Dockerfile`. Change or remove the line `ENV LANG=en_US.UTF-8` to modify this environment variable.
+* By overriding the image default environment variable while running an API Gateway Docker container. For example:
+
+    ```
+    docker run -d --name=apimgr --network=api-gateway-domain -p 8075:8075 -p 8065:8065 -p 8080:8080 -v /tmp/events:/opt/Axway/apigateway/events -e EMT_ANM_HOSTS=anm:8090 -e     CASS_HOST=casshost1 -e METRICS_DB_URL=jdbc:mysql://metricsdb:3306/metrics?useSSL=false -e METRICS_DB_USERNAME=db_user1 -e METRICS_DB_PASS=my_db_pwd -e EMT_TRACE_LEVEL=DEBUG     api-gateway-my-group:1.0 -e LANG=en_IE.UTF-8
+    ```

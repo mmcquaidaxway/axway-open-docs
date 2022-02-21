@@ -17,7 +17,7 @@ To register a back-end API in API Manager, perform the following steps:
 1. In API Manager, select **API Registration** > **Backend API**.
 2. Click **New API**, and select one of the following:
     * **Import API from Topology**: Import a REST API deployed on an API Gateway.
-    * **Import Swagger API**: Import a REST API in JSON format.
+    * **Import Swagger API**: Import a REST API in JSON or YAML format.
     * **Import WADL API**: Import a REST API in WADL format.
     * **Import WSDL API**: Import a web service in WSDL format.
 3. Specify the API details (for example, location, name, and organization), and click **Import**.

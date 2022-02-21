@@ -30,7 +30,7 @@ The `.tar.gz` file must have the following structure inside:
 
 {{< alert title="Note">}}The root directory of the YAML configuration cannot be included in the `.tar.gz` file.{{< /alert>}}
 
-### Use command line tooling to build the YAML .tar.gz
+### Use command line to build the YAML.tar.gz
 
 To build a `yaml-config.tar.gz` package for the YAML configuration in a directory named `~/yamlconfig`, follow this example:
 
@@ -40,9 +40,11 @@ cd ~/yamlconfig && tar -zcvf ../yaml-config.tar.gz * && cd ~
 
 After running the command, the `yaml-config.tar.gz` file is created in your home directory.
 
-### Use maven to build the YAML .tar.gz
+### Use maven to build the YAML.tar.gz
 
-You can also use the `maven-assembly-plugin` to generate a `.tar.gz` file via `mvn clean install`. The following is an example of how to configure a project to use maven to build the `.tar.gz`. The folder structure is as follows:
+You can also use the `maven-assembly-plugin` to generate a `.tar.gz` file via `mvn clean install`.
+
+The following is an example of how to configure a project to use maven to build the `.tar.gz`. The folder structure is as follows:
 
 ```
 +---project
@@ -63,7 +65,7 @@ You can also use the `maven-assembly-plugin` to generate a `.tar.gz` file via `m
     +pom.xml
 ```
 
-The following is the body of the `pom.xml`:
+The following is an example of the `pom.xml` file:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -107,7 +109,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 </project>
 ```
 
-The `archive.xml` for the maven plugin:
+The following is an example of the `archive.xml` file for the maven plugin:
 
 ```xml
 <assembly
@@ -133,21 +135,41 @@ xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assemb
 </assembly>
 ```
 
-The result of running `mvn clean install` in the root directory of this project is a `.tar.gz` file in the target directory, named `yaml-gateway-config-demo-7.7.0-SNAPSHOT-bundle.tar.gz`.
+Running `mvn clean install` in the root directory of this project creates the `yaml-gateway-config-demo-7.7.0-SNAPSHOT-bundle.tar.gz` in the target directory.
 
-## Deployment Package Properties
+## Deployment package Properties
 
-The API Gateway `.fed`, `.pol`, and `.env` configuration package files include property files that contain name-value pairs describing the package contents and which are known as package properties. These package property values are stored in package property files (`.mf`). When the XML federated configuration is converted to YAML, the `.mf` files are copied as they are into the `META-INF` directory on the YAML configuration directory structure. By default, `manifest.mf`, `manifest-policy.mf`, and `manifest-environment.mf` files are created after the conversion. These files can be used as before to hold any user-defined name-value properties for the deployment package. You can edited the files in an IDE of your choice, or via a CI/CD job before deployment.
+The API Gateway `.fed`, `.pol`, and `.env` configuration package files include property files (`.mf`) that contain name-value pairs, also known as package properties, which describe the package contents.
 
-You can remove the existing `manifest-policy.mf` and `manifest-environment.mf` files that are created after conversion if the split no longer makes sense for your deployments. If you remove the `manifest.mf`, it will be recreated on the API Gateway side after deployment, and it contains read-only properties, `timestamp` and `format`.
+When the XML federated configuration is converted to YAML, the `.mf` files are copied into the `META-INF` directory, in the YAML configuration directory structure. By default, the following files are created after the conversion:
 
-You can add custom properties to the `manifest.mf` file, but do delete the read-only properties. We recommended you to add any custom properties to either the `manifest-policy.mf` or `manifest-environment.mf`, or even a new custom manifest file, for example `META_INF/custom.mf`.
+* `manifest.mf`
+* `manifest-policy.mf`
+* `manifest-environment.mf`
+
+You can modify any of these files before the deployment using an editor or via a script as part of your deployment process.
+
+You can remove the `manifest-policy.mf` and `manifest-environment.mf` files that are created after conversion if you no longer require a separation between policy and environment variables.
+
+The `manifest.mf` file is required. It contains two read-only properties, `timestamp` and `format`. If you delete this file, it will be recreated on the API Gateway side after deployment. You can delete the read-only properties and add custom properties. However, we recommended you to add any custom properties to either the `manifest-policy.mf` or `manifest-environment.mf`, or even to a new custom manifest file, for example `META_INF/custom.mf`.
 
 ## Deploy the deployment package
 
-Deployment of YAML configuration via Policy Studio or the API Gateway Manager UI is not yet supported, you must use command line tools instead. For example, `managedomain`, or `projdeploy`.
+You can deploy YAML configuration by way of the following methods:
 
-### Use managedomain to deploy a YAML configuration
+* Policy Studio
+* API Gateway Manager UI
+* A command line deployment tools, such as `managedomain` or `projdeploy`
+
+### Deploy using Policy Studio
+
+For information on how to deploy YAML configuration via Policy Studio, see [Deploy configuration in Policy Studio](/docs/apim_administration/apigtw_admin/deploy_get_started/#deploy-configuration-in-policy-studio).
+
+### Deploy using API Gateway Manager UI
+
+For information on how to deploy YAML configuration in the API Gateway Manager web UI, on port `8090`, see [Deploy a YAML deployment package](/docs/apim_administration/apigtw_admin/managetopology/#deploy-a-yaml-deployment-package).
+
+### Deploy using managedomain
 
 Before you use `managedomain` for deploying, ensure that the YAML `.tar.gz` is encrypted using the same passphrase that the API Gateway uses to decrypt its configuration. The configuration is unencrypted by default. If you converted an XML federated configuration that was encrypted, it is still encrypted by the same passphrase in the converted YAML format.
 
@@ -157,29 +179,31 @@ To deploy `~/archives/yaml-config.tar.gz` via `managedomain` to an API Gateway g
 ./managedomain --deploy --group TestGroup --archive_filename ~/archives/yaml-config.tar.gz --username admin --password changeme
 ```
 
-### Use projdeploy to deploy a YAML configuration
+### Deploy using projdeploy
 
 You can encrypt, reencrypt, or decrypt the YAML `.tar.gz` file with the `projdeploy` tool before deploying to an API Gateway group.
 
-Deploy `~/archives/yaml-config.tar.gz` via `projdeploy` to an API Gateway group when the `.tar.gz` is unencrypted and the API Gateway group is using no passphrase for decryption.
+See the following examples on how to deploy the `~/archives/yaml-config.tar.gz` file using `projdeploy` to an API Gateway group:
+
+When the `.tar.gz` is unencrypted and the API Gateway group is using no passphrase for decryption.
 
 ```
 ./projdeploy --name yaml-config --dir archives --group TestGroup --type targz --passphrase-none --change-pass-to "fred" --deploy-to --host-name=localhost --port=8090 --user-name=admin --password=changeme
 ```
 
-Deploy `~/archives/yaml-config.tar.gz` via `projdeploy` to an API Gateway group when the `.tar.gz` is unencrypted and the API Gateway group is using a passphrase of "changeme" for decryption.
+When the `.tar.gz` is unencrypted and the API Gateway group is using a passphrase of "changeme" for decryption.
 
 ```
 ./projdeploy --name yaml-config --dir archives --group TestGroup --type targz --passphrase-none --change-pass-to "changeme" --deploy-to --host-name=localhost --port=8090 --user-name=admin --password=changeme
 ```
 
-Deploy `~/archives/yaml-config.tar.gz` via `projdeploy` to an API Gateway group when the `.tar.gz` is encrypted using `targz-passphrase` and the API Gateway group is using a passphrase of `group-passphrase` for decryption.
+When the `.tar.gz` is encrypted using `targz-passphrase` and the API Gateway group is using a passphrase of `group-passphrase` for decryption.
 
 ```
 ./projdeploy --name yaml-config --dir archives --group TestGroup --type targz --passphrase "targz-passphrase" --change-pass-to "group-passphrase" --deploy-to --host-name=localhost --port=8090 --user-name=admin --password=changeme
 ```
 
-Deploy `~/archives/yaml-config.tar.gz` via `projdeploy` to an API Gateway group when the `.tar.gz` is encrypted using `targz-passphrase` and the API Gateway group is using no passphrase for decryption.
+When the `.tar.gz` is encrypted using `targz-passphrase` and the API Gateway group is using no passphrase for decryption.
 
 ```
 ./projdeploy --name yaml-config --dir archives --group TestGroup --type targz --passphrase "targz-passphrase" --change-pass-to-none --deploy-to --host-name=localhost --port=8090 --user-name=admin --password=changeme
@@ -189,7 +213,7 @@ See [projdeploy](/docs/apigtw_devops/deploy_package_tools/#example-projdeploy-us
 
 ## Manage your domain topology when YAML is deployed
 
-The API Gateway Manager UI and `managedomain` script will work as normal for topology management when YAML is deployed with a few exceptions described in this section.
+The API Gateway Manager UI and `managedomain` script will work as normal for topology management when YAML is deployed, with some exceptions as described in this section.
 
 For example, you can:
 
