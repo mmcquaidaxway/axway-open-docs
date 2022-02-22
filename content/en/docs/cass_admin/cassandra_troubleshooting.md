@@ -42,8 +42,6 @@ In the event of a failed migration, you can restore your Cassandra environment t
 
 ### Restored Keyspace not visible in API Manager UI
 
-After restoring a keyspace using the `apigw-backup-tool` the restored KPS data should be visible via the API Manager UI.  However if this is not the case, the Cassandra keyspace name may need to be updated in the Server Settings via Policy Studio.
+After [restoring a keyspace](/docs/cass_admin/cassandra_bur/#restore-the-keyspace-backup) using the `apigw-backup-tool`, the restored KPS data should be visible via the API Manager UI. If this is not the case, the Cassandra keyspace name might need to be updated in the [Server Settings](/docs/apim_administration/apimgr_admin/api_mgmt_config_ps/) via Policy Studio.
 
-By default the keyspace name value is referenced via the variable `x${DOMAINID}_${GROUPID}`. When the API Manager is configured a keyspace will be created matching this naming convention.  If the keyspace being restored has a different name (possibly created with a different Gateway) it's name will need to replace the default Cassandra keyspace value.
-
-
+By default, the keyspace name value is referenced via the `x${DOMAINID}_${GROUPID}` variable. When API Manager is configured a keyspace is created matching this naming convention. If the keyspace being restored has a different name (possibly created with a different API Gateway), you must replace the default Cassandra keyspace value with the new name.
